@@ -28,5 +28,22 @@ public class UserController {
         List<User> users = pollManager.getAllUsers();  // Fetch all users from the PollManager
         return new ResponseEntity<>(users, HttpStatus.OK);  // Return 200 OK with the list of users
     }
+    // Get a user by username
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUser(@PathVariable String username) {
+        User user = pollManager.getUser(username);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Delete a user (optional, if needed)
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) {
+        pollManager.removeUser(username);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
 
