@@ -1,12 +1,14 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.time.Instant;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.UUID;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/polls")
@@ -15,36 +17,25 @@ public class PollController {
     @Autowired
     private PollManager pollManager;
 
-    // Create a new poll
-    @PostMapping
-    public ResponseEntity<Poll> createPoll(@RequestBody Poll poll) {
-        // Set the publishedAt field to the current time
-        poll.setPublishedAt(Instant.now());
-        pollManager.addPoll(poll.getQuestion(), poll);
+    @PostMapping("/{username}")
+    public ResponseEntity<Poll> createPoll(@PathVariable String username, @RequestBody Poll poll) {
+        // Generate a unique poll ID
+        String pollId = UUID.randomUUID().toString();
+        poll.setPollId(pollId); // Set pollId in the Poll object
+
+        pollManager.addPoll(pollId, poll); // Store the poll in PollManager
+
+        // Return the poll object, which now contains the pollId, with status CREATED (201)
         return new ResponseEntity<>(poll, HttpStatus.CREATED);
     }
 
-    // List all polls
     @GetMapping
-    public ResponseEntity<List<Poll>> listPolls() {
-        return new ResponseEntity<>(pollManager.getAllPolls(), HttpStatus.OK);
+    public Collection<Poll> listPolls() {
+        return pollManager.getPolls().values();
     }
 
-    // Get a poll by ID (optional)
-    @GetMapping("/{pollId}")
-    public ResponseEntity<Poll> getPoll(@PathVariable String pollId) {
-        Poll poll = pollManager.getPoll(pollId);
-        if (poll != null) {
-            return new ResponseEntity<>(poll, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Delete a poll by ID
     @DeleteMapping("/{pollId}")
-    public ResponseEntity<Void> deletePoll(@PathVariable String pollId) {
-        pollManager.removePoll(pollId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public void deletePoll(@PathVariable String pollId) {
+        pollManager.getPolls().remove(pollId);
     }
 }

@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class Poll {
+    private String pollId;
     private String question;
     private Instant publishedAt;
     private Instant validUntil;
@@ -11,6 +12,15 @@ public class Poll {
 
     // Parameterless constructor
     public Poll() {}
+
+    // Getter and setter for pollId
+    public String getPollId() {
+        return pollId;
+    }
+
+    public void setPollId(String pollId) {
+        this.pollId = pollId;
+    }
 
     // Getters and setters
     public String getQuestion() {

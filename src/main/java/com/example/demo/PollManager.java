@@ -1,21 +1,20 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Component;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 @Component
 public class PollManager {
+    private Map<String, User> users;
+    private Map<String, Poll> polls;
+    private Map<String, List<Vote>> pollVotes;
 
-    private Map<String, User> users = new HashMap<>();
-    private Map<String, Poll> polls = new HashMap<>();
-    private Map<String, Vote> votes = new HashMap<>();
-    private int voteCounter = 1; // To generate unique vote IDs
+    public PollManager() {
+        this.users = new HashMap<>();
+        this.polls = new HashMap<>();
+        this.pollVotes = new HashMap<>();
+    }
 
-    // User management
     public void addUser(String username, User user) {
         users.put(username, user);
     }
@@ -24,28 +23,39 @@ public class PollManager {
         return users.get(username);
     }
 
-    public List<User> getAllUsers() {
-        return new ArrayList<>(users.values());
-    }
-
-    public void removeUser(String username) {
-        users.remove(username);
-    }
-
-    // Poll management
     public void addPoll(String pollId, Poll poll) {
         polls.put(pollId, poll);
+        pollVotes.put(pollId, new ArrayList<>()); // Initialize vote list for this poll
     }
 
     public Poll getPoll(String pollId) {
         return polls.get(pollId);
     }
 
-    public List<Poll> getAllPolls() {
-        return new ArrayList<>(polls.values());
+    public Map<String, User> getUsers() {
+        return users;
     }
 
-    public void removePoll(String pollId) {
+    public Map<String, Poll> getPolls() {
+        return polls;
+    }
+
+    public List<Vote> getVotesForPoll(String pollId) {
+        return pollVotes.get(pollId);
+    }
+
+    public void addVote(String pollId, Vote vote) {
+        pollVotes.get(pollId).add(vote);
+    }
+
+    public void updateVote(String pollId, Vote vote) {
+        List<Vote> votes = pollVotes.get(pollId);
+        votes.removeIf(v -> v.getVoteOption().equals(vote.getVoteOption())); // Remove old vote
+        votes.add(vote);
+    }
+
+    public void deletePoll(String pollId) {
         polls.remove(pollId);
+        pollVotes.remove(pollId);
     }
 }
