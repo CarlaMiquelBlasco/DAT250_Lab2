@@ -9,6 +9,7 @@ public class Vote {
     // Parameterless constructor
     public Vote() {}
 
+
     // Getters and setters
     public Instant getPublishedAt() {
         return publishedAt;

@@ -21,6 +21,9 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (email == null || !email.contains("@")) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
         this.email = email;
     }
 }
