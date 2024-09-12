@@ -31,7 +31,6 @@ public class VoteController {
                 break;  // No need to continue searching
             }
         }
-        //vote.getVoteOption().setUpvotes();
 
         // If the vote option doesn't exist yet, set its upvotes to 1
         if (!optionExists) {

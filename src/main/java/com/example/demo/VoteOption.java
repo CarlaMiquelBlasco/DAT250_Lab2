@@ -17,9 +17,11 @@ public class VoteOption {
         this.caption = caption;
     }
 
-    public int getPresentationOrder() {
+   /* public int getPresentationOrder() {
         return presentationOrder;
     }
+
+    */
 
     public void setPresentationOrder(int presentationOrder) {
         this.presentationOrder = presentationOrder;
@@ -34,7 +36,9 @@ public class VoteOption {
     }
 
     // Method to increment upvotes
-    public void incrementUpvote() {
+    /*public void incrementUpvote() {
         this.upvote++;
     }
+
+     */
 }
