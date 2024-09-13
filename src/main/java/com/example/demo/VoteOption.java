@@ -13,20 +13,6 @@ public class VoteOption {
         return caption;
     }
 
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
-
-   /* public int getPresentationOrder() {
-        return presentationOrder;
-    }
-
-    */
-
-    public void setPresentationOrder(int presentationOrder) {
-        this.presentationOrder = presentationOrder;
-    }
-
     public int getUpvote() {  // Corrected to return an int
         return upvote;
     }
@@ -36,9 +22,22 @@ public class VoteOption {
     }
 
     // Method to increment upvotes
-    /*public void incrementUpvote() {
+    /*
+    public void incrementUpvote() {
         this.upvote++;
+
     }
+    public int getPresentationOrder() {
+        return presentationOrder;
+    }
+    public void setCaption(String caption) {
+        this.caption = caption;
+    }
+
+    public void setPresentationOrder(int presentationOrder) {
+        this.presentationOrder = presentationOrder;
+    }
+
 
      */
 }

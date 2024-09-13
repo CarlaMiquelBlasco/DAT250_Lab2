@@ -14,15 +14,7 @@ public class PollManager {
         this.polls = new HashMap<>();
         this.pollVotes = new HashMap<>();
     }
-/*
-    public void addUser(String username, User user) {
-        users.put(username, user);
-    }
 
-    public User getUser(String username) {
-        return users.get(username);
-    }
-*/
     public void addPoll(String pollId, Poll poll) {
         polls.put(pollId, poll);
         pollVotes.put(pollId, new ArrayList<>()); // Initialize vote list for this poll
@@ -31,11 +23,7 @@ public class PollManager {
     public Poll getPoll(String pollId) {
         return polls.get(pollId);
     }
-/*
-    public Map<String, User> getUsers() {
-        return users;
-    }
-*/
+
     public Map<String, Poll> getPolls() {
         return polls;
     }
@@ -57,6 +45,17 @@ public class PollManager {
     public void deletePoll(String pollId) {
         polls.remove(pollId);
         pollVotes.remove(pollId);
+    }
+    /*
+    public void addUser(String username, User user) {
+        users.put(username, user);
+    }
+
+    public User getUser(String username) {
+        return users.get(username);
+    }
+    public Map<String, User> getUsers() {
+        return users;
     }
 
  */
