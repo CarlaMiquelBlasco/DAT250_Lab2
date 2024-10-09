@@ -27,32 +27,34 @@ public class Poll {
         return question;
     }
 
+
+
     public void setQuestion(String question) {
         this.question = question;
-    }
-
-    public Instant getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(Instant publishedAt) {
-        this.publishedAt = publishedAt;
-    }
-
-    public Instant getValidUntil() {
-        return validUntil;
-    }
-
-    public void setValidUntil(Instant validUntil) {
-        this.validUntil = validUntil;
     }
 
     public List<VoteOption> getVoteOptions() {
         return voteOptions;
     }
 
+    public void setPublishedAt(Instant publishedAt) {
+        this.publishedAt = publishedAt;
+    }
+/*
+    public Instant getValidUntil() {
+        return validUntil;
+    }
+    public Instant getPublishedAt() {
+        return publishedAt;
+    }
+    public void setValidUntil(Instant validUntil) {
+        this.validUntil = validUntil;
+    }
     public void setVoteOptions(List<VoteOption> voteOptions) {
         this.voteOptions = voteOptions;
     }
+
+ */
+
 }
 

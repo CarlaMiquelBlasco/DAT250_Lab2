@@ -11,14 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/polls")
 public class PollController {
 
     @Autowired
     private PollManager pollManager;
 
-    @PostMapping("/{username}")
-    public ResponseEntity<Poll> createPoll(@PathVariable String username, @RequestBody Poll poll) {
+    @PostMapping//"/{username}"
+    public ResponseEntity<Poll> createPoll( @RequestBody Poll poll) {
         // Generate a unique poll ID
         String pollId = UUID.randomUUID().toString();
         poll.setPollId(pollId); // Set pollId in the Poll object
@@ -27,6 +28,11 @@ public class PollController {
 
         // Return the poll object, which now contains the pollId, with status CREATED (201)
         return new ResponseEntity<>(poll, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{pollId}")
+    public Poll getPoll(@PathVariable String pollId) {
+        return pollManager.getPoll(pollId);
     }
 
     @GetMapping
